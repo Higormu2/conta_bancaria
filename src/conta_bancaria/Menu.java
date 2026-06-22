@@ -4,6 +4,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
+import conta_bancaria.model.Conta;
+import conta_bancaria.util.Cores;
+
 public class Menu {
 	 private static String corTexto = Cores.AZUL;
 	 private static String corFundo = Cores.FUNDO_PRETO;
@@ -15,15 +18,38 @@ public class Menu {
 		String resposta;
 		boolean finalizar = false;
 		
+		/* Instanciar objetos da Classe Conta*/
+		Conta c1 = new Conta(1, 123, 1, "Isabella", 20000.0f);
+		c1.visualizar();
+		
+		Conta c2 = new Conta(1, 123, 2, "Thiago", 20000.0f);
+		c2.visualizar();
+		
+//		c1.setSaldo(30000.00f);
+//		c1.visualizar();
+		
+		/*if ternario
+		 * 
+		 * condição ? ação se for verdadeiro : ação se for falso
+		 * 
+		 */
+		
+		
+		
+		//Sacar//
+		System.out.println("\nSacar R$ 1.000,00 da conta C2: " + (c2.sacar(3000.00f) ? "Saque efetuado com sucesso!" : "Saldo Insuficiente"));
+		c2.visualizar();
+		
+		//Depositar//
+		c2.depositar(50000.00f);
+		c2.visualizar();
+		
+	
 		filas:
 		while(finalizar == false){
-			
-			
+		
 			 System.out.println(corFundo + corTexto);
-		    
-		  
-			
-			
+
 			 Cores.aplicarTema();
 			System.out.println("******************************************************");
 			System.out.println("  \n Banco do Brazil com Z - O seu Futuro começa aqui!\n");
