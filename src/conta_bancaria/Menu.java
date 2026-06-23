@@ -4,55 +4,28 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
+import conta_bancaria.controller.ContaController;
 import conta_bancaria.model.Conta;
 import conta_bancaria.model.ContaCorrente;
+import conta_bancaria.model.ContaPoupaca;
 import conta_bancaria.util.Cores;
 
 public class Menu {
 	 private static String corTexto = Cores.AZUL;
+	 private static final Scanner leia = new Scanner(System.in);
+	 private static final ContaController contaController = new ContaController();
 	 private static String corFundo = Cores.FUNDO_PRETO;
 
 	public static void main(String[] args) {
-		Scanner leia = new Scanner(System.in);
+		
 		Queue<String> fila = new LinkedList<String>();
 		int opcao;
+		//Criar dados de testes
+		criarContasTeste();
 		String resposta;
 		boolean finalizar = false;
-		
-		/* Instanciar objetos da Classe Conta*/
-		Conta c1 = new Conta(1, 123, 1, "Isabella", 20000.0f);
-		c1.visualizar();
-		
-		Conta c2 = new Conta(1, 123, 2, "Thiago", 20000.0f);
-		c2.visualizar();
-		
-//		c1.setSaldo(30000.00f);
-//		c1.visualizar();
-		
-		/*if ternario
-		 * 
-		 * condição ? ação se for verdadeiro : ação se for falso
-		 * 
-		 */
-		
-		
-		
-		//Sacar//
-		System.out.println("\nSacar R$ 1.000,00 da conta C2: " + (c2.sacar(3000.00f) ? "Saque efetuado com sucesso!" : "Saldo Insuficiente"));
-		c2.visualizar();
-		
-		//Depositar//
-		c2.depositar(50000.00f);
-		c2.visualizar();
-		
-		
-		/* Instaciar Objetos da classe ContaCorrente*/
-		
-		ContaCorrente cc1 = new ContaCorrente(3, 789, 1, "Raquel", 200000.00f, 20000.00f);
-		cc1.visualizar();
-		
-		System.out.println("\nSacar R$ 202.000,00 da conta Cc1: " + (cc1.sacar(202000.00f) ? "Saque efetuado com sucesso!" : "Saldo Insuficiente"));
-		c2.visualizar();
+
+	
 	
 		filas:
 		while(finalizar == false){
@@ -89,31 +62,22 @@ public class Menu {
 					System.out.println("	 Criar Conta		"); 
 					System.out.println("************************\n"); 
 					
-					System.out.println("Informe o nome do cliente: ");
-					String nome = leia.next();
-					fila.add(nome);
+				
+					
+					
+					
 					System.out.println("Quer adicionar mais um cliente a fila? (Sim/Não)");
 					resposta = leia.next();
-					
-					
 				}while(resposta.equalsIgnoreCase("Sim"));
 	
 			break;
 			case 2:
-				
-				if(fila.isEmpty()) {
-					System.out.println("Nenhuma conta encontrada"); 
-				}else
-				{
+
 					System.out.println("**********************"); 
 					System.out.println("Listar todas as Contas"); 
 					System.out.println("**********************"); 
-					
-					for(String fil:fila)
-					{
-						System.out.println(fil);
-					}
-				}
+					listarContas();
+
 			break;
 			case 3:
 			{
@@ -203,6 +167,8 @@ public class Menu {
 					System.out.println("****************************"); 
 					System.out.println("  			Sacar		    "); 
 					System.out.println("****************************"); 
+					
+					
 				}
 				
 				
@@ -218,6 +184,8 @@ public class Menu {
 					System.out.println("****************************"); 
 					System.out.println("  		  Depositar		    "); 
 					System.out.println("****************************"); 
+					
+					
 				}
 				
 				
@@ -248,6 +216,14 @@ public class Menu {
 			System.out.println("Deseja fazer mais uma operação? ");
 			resposta = leia.next();
 		}
+	}
+	
+	public static void criarContasTeste() {
+		contaController.cadastrar(new ContaCorrente(contaController.gerarNumero(), 456, 1, "Thuany Silva", 1000000.00f, 100000.00f));
+		contaController.cadastrar(new ContaPoupaca(contaController.gerarNumero(), 456, 2, "Marcia Condarco", 1000000.00f, 100.00f, 10));
+	}
+	public static void listarContas() {
+		contaController.listarTodas();
 	}
 
 }
