@@ -45,8 +45,8 @@ public class Menu {
 			System.out.println("  6 - Sacar						  					  ");
 			System.out.println("  7 - Depositar					  					  ");
 			System.out.println("  8 - Transferir valores entre Contas				  ");
+			System.out.println("  9 - Consulta por nome do titular					  ");
 			System.out.println("  0 - Depositar					 					  ");
-			System.out.println("								  					  ");
 			System.out.println("******************************************************");
 			System.out.println("Entre com a opção desejada:		  					  ");
 
@@ -129,7 +129,7 @@ public class Menu {
 					System.out.println("****************************");
 					System.out.println("  			Sacar		    ");
 					System.out.println("****************************");
-
+					sacar();
 				}
 
 			}
@@ -144,7 +144,7 @@ public class Menu {
 					System.out.println("****************************");
 					System.out.println("  		  Depositar		    ");
 					System.out.println("****************************");
-
+					depositar();
 				}
 
 			}
@@ -153,13 +153,23 @@ public class Menu {
 				break;
 
 			case 8: {
-				if (fila.isEmpty()) {
-					System.out.println("Fila está fazia");
-				} else {
+				
 					System.out.println("***********************************");
 					System.out.println("  Transferir valores entre Contas  ");
 					System.out.println("***********************************");
-				}
+					transferir();
+					
+				
+
+			}
+			case 9: {
+				
+					System.out.println("***********************************");
+					System.out.println("  Consulta por nome do titular	   ");
+					System.out.println("***********************************");
+					listarPorTitular();
+					
+				
 
 			}
 
@@ -324,6 +334,46 @@ public class Menu {
 		{
 			System.out.printf("\nA conta número %d não foi encontrada!", numero);
 		}
+	}
+	public static void sacar() {
+		System.out.println("Digite o numero da conta: ");
+		int numero = leia.nextInt();
+		
+		System.out.println("Digite o valor do saque: ");
+		float valor = leia.nextFloat();
+		
+		contaController.sacar(numero, valor);
+	}
+	
+	public static void depositar() {
+		System.out.println("Digite o numero da conta: ");
+		int numero = leia.nextInt();
+		
+		System.out.println("Digite o valor do deposito: ");
+		float valor = leia.nextFloat();
+		
+		contaController.sacar(numero, valor);
+	}
+	
+	public static void transferir() {
+		System.out.println("Digite o numero da conta de origem: ");
+		int numeroOrigem = leia.nextInt();
+		
+		System.out.println("Digite o numero da conta de destino: ");
+		int numeroDestino = leia.nextInt();
+		
+		System.out.println("Digite o valor da tranferencia: ");
+		float valor = leia.nextFloat();
+		
+		contaController.transferir(numeroOrigem,numeroDestino, valor);
+	}
+	
+	public static void listarPorTitular() {
+		System.out.println("Digite o nome do titular da conta: ");
+		leia.skip("\\R");
+		String titular = leia.nextLine();
+		
+		contaController.listarPorTitular(titular);
 	}
 
 }
